@@ -120,6 +120,30 @@ Transitions are currently only support by lights, which in their turn, have
 to support it as well. However, the scene itself does not have to consist of
 only lights to have a transition set.
 
+## Partially applying a scene
+
+When using the `scene.turn_on` action, an entity filter may be specified with a
+list of entities in which the scene will be applied.
+
+This example shows a generic scene being applied to only a few entities.
+
+```yaml
+# Example automation
+automation:
+  triggers:
+    - trigger: state
+      entity_id: sensor.bedroom_remote_action
+      to: "hold"
+  actions:
+    - action: scene.turn_on
+      target:
+        entity_id: scene.home_holiday
+      data:
+        entity_filter:
+          - light.bedside_table
+          - media_player.tv_fireplace
+```
+
 ## Reloading scenes
 
 Whenever you make a change to your scene configuration, you can call the `scene.reload` action to reload the scenes.
